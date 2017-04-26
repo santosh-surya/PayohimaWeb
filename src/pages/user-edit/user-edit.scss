@@ -1,0 +1,20 @@
+page-user-edit {
+    ion-select{
+        // max-width: 100%;
+    }
+    div.item-inner{
+        border-bottom: none !important;
+    }
+    ion-grid{
+        ion-row{
+            padding: 5px;
+            background-color:#efefef;
+        }
+        ion-row{
+            border-bottom: 1px dashed lightgrey;
+        }
+    }
+    span.button-inner{
+        text-transform: capitalize !important;
+    }
+}

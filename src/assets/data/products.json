@@ -1,0 +1,14 @@
+  [ 
+    {
+      "name" : "Product 1",
+      "image": "/assets/images/placeholder-400x300.png",
+      "short_description": "Product description",
+      "long_description": "Product long description for detailed view of product",
+      "price":[
+        { "unit": "scoop", "cost": "50"},
+        { "unit": "250ml", "cost": "150"},
+        { "unit": "500ml", "cost": "250"}
+      ],
+      "category": ["popular"]
+    }
+  ]

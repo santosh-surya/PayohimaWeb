@@ -1,0 +1,65 @@
+
+<ion-content padding [ngClass]="{'web': this.platform._platforms.indexOf('core')>=0}">
+  <form [formGroup]="signupForm">
+    <ion-card padding>
+      <ion-card-header>
+        <h1>Create New Account</h1>
+      </ion-card-header>
+      <ion-list>
+        <ion-item-divider color="light">About You</ion-item-divider>
+        <ion-item>
+          <ion-label color="primary" floating>Your Name</ion-label>
+          <ion-input type="text" [class.invalid]="!signupForm.controls.displayName.valid && signupForm.controls.displayName.dirty" formControlName="name"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!signupForm.controls.displayName.valid  && signupForm.controls.displayName.dirty">
+          <p>Please enter your name.</p>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary" floating>Mobile Number</ion-label>
+          <ion-input type="text" [class.invalid]="!signupForm.controls.mobile.valid && signupForm.controls.mobile.dirty" formControlName="mobile"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!signupForm.controls.mobile.valid  && signupForm.controls.mobile.dirty">
+          <p>Please enter 9 or more digits.</p>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary" floating>Email Address</ion-label>
+          <ion-input type="text" [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!signupForm.controls.email.valid  && signupForm.controls.email.dirty">
+          <p>Please enter a valid email.</p>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary" floating>Enter Password</ion-label>
+          <ion-input type="password" [class.invalid]="!signupForm.controls.password.valid && signupForm.controls.password.dirty" formControlName="password"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!signupForm.controls.password.valid  && signupForm.controls.password.dirty">
+          <p>Password must be 8 characters long.</p>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary" floating>Confirm Password</ion-label>
+          <ion-input type="password" [class.invalid]="!signupForm.controls.confirmpassword.valid && signupForm.controls.confirmpassword.dirty" formControlName="confirmpassword"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!signupForm.controls.confirmpassword.valid  && signupForm.controls.confirmpassword.dirty">
+          <p>Password do not match.</p>
+        </ion-item>
+        <ion-item-divider color="light">About Your Company</ion-item-divider>
+        <ion-item>
+          <ion-label color="primary" floating>Company Name</ion-label>
+          <ion-input type="text" [class.invalid]="!signupForm.controls.companyname.valid && signupForm.controls.companyname.dirty" formControlName="companyname"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary" floating>Company Address [Optional]</ion-label>
+          <ion-textarea rows="4" type="text" [class.invalid]="!signupForm.controls.companyaddress.valid && signupForm.controls.companyaddress.dirty" formControlName="companyaddress"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <button margin-top="10px" large rounded ion-button style="float:right;" (click)="signupUser()">
+            Create an Account
+          </button>
+          <button margin-top="10px" color="danger" large rounded ion-button left (click)="cancel()">
+            Cancel
+          </button>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+  </form>
+</ion-content>

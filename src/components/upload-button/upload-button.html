@@ -1,0 +1,129 @@
+    <button *ngIf="full && large && iconLeft" full large icon-left ion-button (click)="callback($event)">
+      <ion-icon name="{{btnStyle}}"></ion-icon>
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="full && large && iconRight" full large icon-left ion-button (click)="callback($event)">
+      <ion-icon name="{{btnStyle}}"></ion-icon>
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="full && large && (!iconLeft && !iconRight)" full large ion-button (click)="callback($event)">
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="full && small && iconLeft" full small icon-left ion-button (click)="callback($event)">
+      <ion-icon name="{{btnStyle}}"></ion-icon>
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="full && small && iconRight" full small icon-left ion-button (click)="callback($event)">
+      <ion-icon name="{{btnStyle}}"></ion-icon>
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="full && small && (!iconLeft && !iconRight)" full small ion-button (click)="callback($event)">
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="full && (!large && !small) && iconLeft" full icon-left ion-button (click)="callback($event)">
+      <ion-icon name="{{btnStyle}}"></ion-icon>
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="full && (!large && !small) && iconRight" full icon-left ion-button (click)="callback($event)">
+      <ion-icon name="{{btnStyle}}"></ion-icon>
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="full && (!large && !small) && (!iconLeft && !iconRight)" full ion-button (click)="callback($event)">
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+
+    <button *ngIf="block && large && iconLeft" block large icon-left ion-button (click)="callback($event)">
+      <ion-icon name="{{btnStyle}}"></ion-icon>
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="block && large && iconRight" block large icon-left ion-button (click)="callback($event)">
+      <ion-icon name="{{btnStyle}}"></ion-icon>
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="block && large && (!iconLeft && !iconRight)" block large ion-button (click)="callback($event)">
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="block && small && iconLeft" block small icon-left ion-button (click)="callback($event)">
+      <ion-icon name="{{btnStyle}}"></ion-icon>
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="block && small && iconRight" block small icon-left ion-button (click)="callback($event)">
+      <ion-icon name="{{btnStyle}}"></ion-icon>
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="block && small && (!iconLeft && !iconRight)" block small ion-button (click)="callback($event)">
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="block && (!large && !small) && iconLeft" block icon-left ion-button (click)="callback($event)">
+      <ion-icon name="{{btnStyle}}"></ion-icon>
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="block && (!large && !small) && iconRight" block icon-left ion-button (click)="callback($event)">
+      <ion-icon name="{{btnStyle}}"></ion-icon>
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="block && (!large && !small) && (!iconLeft && !iconRight)" block ion-button (click)="callback($event)">
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+
+    <button *ngIf="(!block && !full) && large && iconLeft" large icon-left ion-button (click)="callback($event)">
+      <ion-icon name="{{btnStyle}}"></ion-icon>
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="(!block && !full) && large && iconRight" large icon-left ion-button (click)="callback($event)">
+      <ion-icon name="{{btnStyle}}"></ion-icon>
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="(!block && !full) && large && (!iconLeft && !iconRight)" large ion-button (click)="callback($event)">
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="(!block && !full) && small && iconLeft" small icon-left ion-button (click)="callback($event)">
+      <ion-icon name="{{btnStyle}}"></ion-icon>
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="(!block && !full) && small && iconRight" small icon-left ion-button (click)="callback($event)">
+      <ion-icon name="{{btnStyle}}"></ion-icon>
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="(!block && !full) && small && (!iconLeft && !iconRight)" small ion-button (click)="callback($event)">
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="(!block && !full) && (!large && !small) && iconLeft" icon-left ion-button (click)="callback($event)">
+      <ion-icon name="{{btnStyle}}"></ion-icon>
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="(!block && !full) && (!large && !small) && iconRight" icon-left ion-button (click)="callback($event)">
+      <ion-icon name="{{btnStyle}}"></ion-icon>
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <button *ngIf="(!block && !full) && (!large && !small) && (!iconLeft && !iconRight)" ion-button (click)="callback($event)">
+      <div *ngIf="!uploading">{{placeHolder}}</div><ion-spinner *ngIf="uploading" name="bubbles"></ion-spinner>
+      <input type="file" (change)="filesAdded($event)" style="display: none" multiple #inputfileuploadbutton />
+    </button>
+    <div class="filename" >{{filename}}</div>

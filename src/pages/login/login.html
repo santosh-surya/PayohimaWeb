@@ -1,0 +1,61 @@
+
+<ion-content padding [ngClass]="{'web': this.platform._platforms.indexOf('core')>=0}">
+
+<ion-card>
+
+  <ion-card-header>
+    <h1>Login or Sign Up</h1>
+  </ion-card-header>
+
+  <ion-card-content>
+  <form [formGroup]="loginForm" novalidate>
+
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
+      <ion-input #email formControlName="email" type="email" 
+        placeholder="Your email address"
+        [class.invalid]="!loginForm.controls.email.valid && (emailChanged || submitAttempt)"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!loginForm.controls.email.valid  && (emailChanged || submitAttempt)">
+      <p>Please enter a valid email.</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Password</ion-label>
+      <ion-input #password formControlName="password" type="password" 
+        placeholder="Your password"
+        [class.invalid]="!loginForm.controls.password.valid && (passwordChanged || submitAttempt)"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!loginForm.controls.password.valid  && (passwordChanged || submitAttempt)">
+      <p>Your password needs more than 6 characters.</p>
+    </ion-item>
+
+      <button margin-top="10px" ion-button block (click)="loginUser()">
+        Login
+      </button>
+
+      <!--<button margin-top="10px" ion-button icon-left block (click)="facebookLogin()" class="facebook">
+        <ion-icon name="facebook"></ion-icon>
+        Login with FACEBOOK
+      </button>-->
+    
+      <!--<button margin-top="10px" ion-button icon-left block (click)="googleLogin()" class="google">
+        <ion-icon name="google"></ion-icon>
+        Login with Google+
+      </button>-->
+
+      <button margin-top="10px" ion-button block color="primary" outline (click)="goToSignup()">
+        Create a new account
+      </button>
+
+      <button margin-top="10px" ion-button block color="primary" outline (click)="goToResetPassword()">
+        I forgot my password
+      </button>
+
+  </form>
+    <!-- Add card content here! -->
+  </ion-card-content>
+
+</ion-card>
+
+</ion-content>

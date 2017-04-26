@@ -1,0 +1,2 @@
+root: platforms/browser/www
+http_strict_transport_security: true

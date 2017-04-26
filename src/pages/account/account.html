@@ -1,0 +1,69 @@
+ <ion-header>
+  <ion-navbar>
+    <ion-row>
+      <ion-col margin-vertical>
+        <button ion-button menuToggle left>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col margin-horizontal text-center>
+        <h2>Account</h2>
+      </ion-col>
+      <ion-col  text-right>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content padding [ngClass]="{'web': this.platform._platforms.indexOf('core')>=0}">
+  <form [formGroup]="accountForm">
+    <ion-list>
+      <ion-item>
+        <div style="text-align: center;">
+        <img #profileImage style="margin: 0 auto; max-width: 300px " src="{{getUser().photoURL}}">
+        </div>
+      </ion-item>
+      <ion-item>
+          <upload-button block icon-left [uploading]="uploading" id="imageUpload" placeHolder="Upload Image" iconPosition="icon-left" iconName="file" [change]="uploadFile.bind(this)"></upload-button>
+          <!--<input class="upload" #imageUpload type="file" placeholder="Change Image" (change)="uploadFile()">-->
+      </ion-item>
+      
+      <ion-item-divider color="light">About You</ion-item-divider>
+      <ion-item>
+        <ion-label color="primary" floating>Your Name</ion-label>
+        <ion-input type="text" [class.invalid]="!accountForm.controls.displayName.valid && accountForm.controls.displayName.dirty" formControlName="displayName"></ion-input>
+      </ion-item>
+        <ion-item class="error-message" *ngIf="!accountForm.controls.displayName.valid  && accountForm.controls.displayName.dirty">
+          <p>Please enter your name.</p>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary" floating>Mobile Number</ion-label>
+          <ion-input type="text" [class.invalid]="!accountForm.controls.mobile.valid && accountForm.controls.mobile.dirty" formControlName="mobile"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!accountForm.controls.mobile.valid  && accountForm.controls.mobile.dirty">
+          <p>Please enter 9 or more digits.</p>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary" floating>Email Address</ion-label>
+          <ion-input disabled="true" value="{{getUser().email}}"></ion-input>
+        </ion-item>
+        <ion-item-divider color="light">Your Roles</ion-item-divider>
+        <ion-item *ngFor="let role of getUser().roles">
+          <ion-label left color="primary" style="float: left;">{{role.location}}</ion-label>
+          <ion-input right disabled="true" style="float:left;" value="{{role.role}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-buttons>
+          <button margin-top="10px" ion-button style="float:left;" color="danger" (click)="save()">
+            Cancel
+          </button>
+          <button margin-top="10px" ion-button style="float:right;" color="primary" (click)="save()">
+            Save
+          </button>
+          </ion-buttons>
+        </ion-item>
+      </ion-list>
+  </form>
+</ion-content>

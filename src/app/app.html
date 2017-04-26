@@ -1,0 +1,37 @@
+<ion-menu [content]="content" type="push">
+  <ion-header *ngIf="authService.currentUser != null">
+   <ion-item>
+    <ion-avatar item-left>
+      <img #accountImage src="{{photoURL}}">
+    </ion-avatar>
+    <h2>{{authService.currentUser.displayName}}</h2>
+    <p>{{authService.currentUser.companyName}}</p>
+    <p>{{authService.currentUser.email}}</p>
+    <button menuToggle clear (click)="signOut()">
+      <ion-icon name="log-out"></ion-icon>
+      Sign Out
+    </button>
+    
+  </ion-item>
+  </ion-header>
+  <ion-header *ngIf="authService.currentUser == null">
+    Menu
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <button  menuToggle ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        <ion-icon name="{{p.icon}}"></ion-icon>
+        {{p.title}}
+      </button>
+      <button ion-item menuToggle (click)="signOut()">
+        <ion-icon name="log-out"></ion-icon>
+        Sign Out
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

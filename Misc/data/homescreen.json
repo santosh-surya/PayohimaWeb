@@ -1,0 +1,25 @@
+[  {
+  "body" : "Spread the word & earn with very minimal investment. Please contact us over phone or via email",
+  "image" : "https://firebasestorage.googleapis.com/v0/b/ukmm-8ae9c.appspot.com/o/homescreen-images%2Fdojo%2Bgelato%2Bice%2Bcream%2Bscoops%2Bhome%2Bpage.jpeg?alt=media&token=901ed442-38f2-43fa-a1c8-e7bbc71a1ef6",
+  "open" : "GelatoPage",
+  "title" : "Become Payohima Partner",
+  "type" : 2
+}, {
+  "body" : "Gelato contains 3% - 8% Fat and is low in Fat as compared to Industrial Ice Creams",
+  "image" : "https://firebasestorage.googleapis.com/v0/b/ukmm-8ae9c.appspot.com/o/homescreen-images%2Fimage1.jpeg?alt=media&token=4c25dd11-7bbf-4e15-8c4f-59aeff741432",
+  "open" : "GelatoPage",
+  "title" : "Low in Fat",
+  "type" : 2
+}, {
+  "body" : "Whatever your occassion, we have a flavour that you will like. Ask us for a sample box.",
+  "image" : "https://firebasestorage.googleapis.com/v0/b/ukmm-8ae9c.appspot.com/o/homescreen-images%2FGelatoGiulianaCones.png?alt=media&token=1a363dc7-8c95-4ab2-b870-2b9ba57483f6",
+  "open" : "GelatoPage",
+  "title" : "Ask for Sample",
+  "type" : 1
+},{
+  "body" : "We make Gelato using all natural ingredients. This ensures that the flavours are original and can tickle your taste buds.",
+  "image" : "https://firebasestorage.googleapis.com/v0/b/ukmm-8ae9c.appspot.com/o/homescreen-images%2Ffruit-sorbet.jpg?alt=media&token=88937ade-2d6e-4281-b4a2-1258387ab4d8",
+  "open" : "SorbetPage",
+  "title" : "Natural Ingredients",
+  "type" : 1
+} ]

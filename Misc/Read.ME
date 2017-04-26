@@ -1,0 +1,82 @@
+Firebase:
+
+Sender ID: 598320677247
+Server Key: AAAAi06xAX8:APA91bHWRkLHWuaMDqPWJDCepy5PCoVYuKSOk5HdqXIccbwwTaIaVFVB6ztgdiP4bzDGKMIV_kI4Xq10YcBNS8DnlrVetlgSWOz3ToKZONiKVLtMm4gAwASLZV16jx4zJXsYwC7JPW_1
+
+
+var config = {
+    apiKey: "AIzaSyAnVF75YKMd-XKFd275jKGNKSEuaarsLqQ",
+    authDomain: "payohima-10d68.firebaseapp.com",
+    databaseURL: "https://payohima-10d68.firebaseio.com",
+    storageBucket: "payohima-10d68.appspot.com",
+    messagingSenderId: "921700995648"
+};
+firebase.initializeApp(config);
+
+Facebook:
+
+App ID: 1149723311792109
+App Secret: 19d5b2e9c6be9081f933cb643a5a2a0c
+
+Apple Push:
+
+Development Push:
+Create Apple Push Notification Certificate for Development and download it as aps_development.cer file
+Open the file in KeyChain Access and then export the private key for the certificate as aps_development_key.p12 files
+$ openssl x509 -in aps_development.cer -inform DER -outform PEM -out aps_development.pem (original apple cer file)
+$ openssl pkcs12 -in aps_development_key.p12 -out aps_development_key.pem -nodes
+
+Production Push:
+Create Apple Push Notification Certificate for Production and download it as aps.cer
+Open the file in KeyChain Access and then export the certificate & private key separately as aps_key.p12 files
+$ openssl x509 -in aps.cer -inform DER -outform PEM -out aps.pem (original apple cer file)
+$ openssl pkcs12 -in aps_key.p12 -out aps_key.pem -nodes
+
+Test:
+openssl s_client -connect gateway.push.apple.com:2195 -cert <your>.pem -key key.pem # production
+
+----------------- App Release --------------------
+ios:
+
+ionic build ios --device --release
+
+upload the ipa file to HockeyApp
+
+Android: 
+
+ionic build android --device --release
+
+Generate key 
+
+keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
+
+--------- keytool -exportcert -list -v -alias alias_name -keystore ./my-release-key.keystore
+Alias name: alias_name
+Creation date: 23-Jan-2017
+Entry type: PrivateKeyEntry
+Certificate chain length: 1
+Certificate[1]:
+Owner: CN=Santosh Singh, OU=Payohima, O=Payohima, L=Mumbai, ST=Maharashtra, C=IN
+Issuer: CN=Santosh Singh, OU=Payohima, O=Payohima, L=Mumbai, ST=Maharashtra, C=IN
+Serial number: 27ff2e4d
+Valid from: Mon Jan 23 17:11:39 GMT 2017 until: Fri Jun 10 18:11:39 BST 2044
+Certificate fingerprints:
+	 MD5:  B2:CE:15:58:50:DE:95:E5:B0:4A:C7:00:6D:BD:87:DF
+	 SHA1: 92:5D:B4:9D:B4:C0:04:C3:35:0B:68:0D:CC:AF:FF:7B:3B:66:33:5D
+	 SHA256: 49:A9:2C:FC:E7:C2:11:9F:4C:35:2C:2B:AD:A7:D3:7B:49:EF:F1:31:32:D0:35:80:94:B2:1C:FC:97:D0:00:6C
+	 Signature algorithm name: SHA256withRSA
+	 Version: 3
+-----------
+Sign APK file using this key:
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ./Misc/android/my-release-key.keystore ./platforms/android/build/outputs/apk/android-release-unsigned.apk alias_name
+
+Align the apk file:
+
+/Users/santosh/Library/Developer/Xamarin/android-sdk-macosx/build-tools/23.0.2/zipalign -v 4 ./platforms/android/build/outputs/apk/android-release-unsigned.apk payohima.apk
+
+command to run to build:
+ionic build android --device --release
+echo "payohima" | jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ./Misc/android/my-release-key.keystore ./platforms/android/build/outputs/apk/android-release-unsigned.apk alias_name;
+/Users/santosh/Library/Developer/Xamarin/android-sdk-macosx/build-tools/23.0.2/zipalign -fv 4 ./platforms/android/build/outputs/apk/android-release-unsigned.apk ./platforms/android/build/outputs/apk/payohima.apk
+

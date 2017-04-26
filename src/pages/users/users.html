@@ -1,0 +1,36 @@
+ <ion-header>
+  <ion-navbar>
+    <ion-row>
+      <ion-col margin-vertical>
+        <button ion-button menuToggle left>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col margin-horizontal text-center>
+        <h2>Manage Users</h2>
+      </ion-col>
+      <ion-col  text-right>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-fab top right edge>
+    <button ion-fab mini (click)="createUser()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+  <ion-searchbar (ionInput)="filterUsers($event)"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let user of users" (click)="userSelected(user)">
+      <ion-avatar item-left>
+        <img src="{{user.photoURL}}">
+      </ion-avatar>
+      <h2>{{ user.displayName }}</h2>
+      <p> {{user.email}}</p>
+      <ion-note item-right>
+        <p *ngFor="let role of user.roles">{{role.location}}: {{role.role}}</p>
+      </ion-note>
+
+    </ion-item>  
+  </ion-list>
+</ion-content>

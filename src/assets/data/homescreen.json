@@ -1,0 +1,8 @@
+[ {
+    "title" : "Title",
+    "body" : "Description",
+    "image": "/assets/images/placeholder-400x300.png",
+    "type" : 2, 
+    "action": ""
+  }
+]

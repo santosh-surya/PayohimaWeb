@@ -1,0 +1,121 @@
+ <ion-header>
+  <ion-navbar>
+    <ion-row>
+      <ion-col margin-vertical>
+        <button ion-button menuToggle left>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col margin-horizontal text-center>
+        <h2>{{getTitle()}}</h2>
+      </ion-col>
+      <ion-col  text-right>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="userForm">
+      <ion-list>
+        <ion-item>
+          <!--<ion-label color="primary" floating>Name</ion-label>-->
+          <ion-input type="text" placeholder="Name" [class.invalid]="!userForm.controls.displayName.valid && userForm.controls.displayName.dirty" formControlName="displayName"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!userForm.controls.displayName.valid  && userForm.controls.displayName.dirty">
+          <p>Please enter name.</p>
+        </ion-item>
+        <ion-item>
+          <!--<ion-label color="primary" floating>Mobile Number</ion-label>-->
+          <ion-input type="text" placeholder="Mobile Number" [class.invalid]="!userForm.controls.mobile.valid && userForm.controls.mobile.dirty" formControlName="mobile"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!userForm.controls.mobile.valid  && userForm.controls.mobile.dirty">
+          <p>Please enter 9 or more digits.</p>
+        </ion-item>
+        <ion-item>
+          <!--<ion-label color="primary" floating>Email Address</ion-label>-->
+          <ion-input type="text" placeholder="Email Address" [class.invalid]="!userForm.controls.email.valid && userForm.controls.email.dirty" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!userForm.controls.email.valid  && userForm.controls.email.dirty">
+          <p>Please enter a valid email.</p>
+        </ion-item>
+        <ion-item>
+          <!--<ion-label color="primary" floating>Enter Password</ion-label>-->
+          <ion-input type="password" placeholder="Enter Password" [class.invalid]="!userForm.controls.password.valid && userForm.controls.password.dirty" formControlName="password"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!userForm.controls.password.valid  && userForm.controls.password.dirty">
+          <p>Password must be 8 characters long.</p>
+        </ion-item>
+        <ion-item>
+          <!--<ion-label color="primary" floating>Confirm Password</ion-label>-->
+          <ion-input type="password" placeholder="Confirm Password" [class.invalid]="(userForm.controls.password.value.length>0 && !userForm.controls.confirmpassword.value.length==0) || (userForm.controls.password.value.length>0 && !userForm.controls.confirmpassword.valid)" formControlName="confirmpassword"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="(userForm.controls.password.value.length>0 && !userForm.controls.confirmpassword.valid)">
+          <p>Password do not match.</p>
+        </ion-item>
+      </ion-list>
+      <ion-grid>
+        <ion-row center >
+          <ion-col>
+            <h2>Roles</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row center *ngFor="let role of user.roles; let i = index;">
+          <ion-col>
+            <ion-item>
+              <ion-label>{{role.location}}</ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>{{role.role}}</ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col text-right>
+            <button ion-button icon-only outline item-right (click)="removeRole(role, i)">
+              <ion-icon name="trash"></ion-icon>
+            </button>          
+          </ion-col>
+        </ion-row>
+        <ion-row center>
+          <ion-col col-4>
+            <ion-item>
+              <ion-select  formControlName="locationnew" interface="action-sheet" placeholder="Select Location" >
+                <ion-option *ngFor="let location of locationService.locations">{{location.name}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col col-4>
+            <ion-item>
+              <ion-select formControlName="rolenew" interface="action-sheet" placeholder="Select Location" mode="ios" >
+                <ion-option *ngFor="let r of roleMaster" >{{r}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col text-right col-4>
+            <button ion-button icon-left outline (click)="addRole()">
+              <ion-icon name="checkmark-circle"></ion-icon>
+              Add Role
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-list>
+        <ion-item>
+          <button margin-top="10px" large rounded ion-button style="float:right;" (click)="createUser()" *ngIf="isNew">
+            Create User
+          </button>
+          <button margin-top="10px" large rounded ion-button style="float:right;"  (click)="saveUser()" *ngIf="!isNew">
+            Save User
+          </button>
+          <button margin-top="10px" color="danger" large rounded ion-button left (click)="cancel()">
+            Cancel
+          </button>
+          <button margin-top="10px" color="dark" large rounded ion-button right (click)="deleteUser()">
+            Delete User
+          </button>
+        </ion-item>
+      </ion-list>
+  </form>
+  
+</ion-content>

@@ -1,0 +1,90 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+// $PAYOHIMA_COLOR : #4b2a5d;
+// $SIDEMENU_TOP: #4b2a5d;
+// $SIDEMENU_BOTTOM: #4b2a5d;
+// $SIDEMENU_TRANSPARENCY: rgba(255,255,255,0);
+
+// ion-toolbar, ion-navbar{
+//     // height: 80px !important;
+//     h1,h2,h3{
+//         color: white;
+//     }
+// }
+// ion-menu{
+//     .item-inner{
+//         border-bottom: none !important;
+//     }
+//     ion-header{
+//         ion-item{
+//             // background-color: $PAYOHIMA_COLOR !important;
+//             ion-label{
+//                 color: white !important;
+//                 p{
+//                     color: #bfbfbf !important;
+//                 }
+//             }
+//         }
+//     }
+// }
+// ion-label{
+//     color: $PAYOHIMA_COLOR;
+// }
+// .toolbar-background {
+//     background: -webkit-gradient(left top, $SIDEMENU_TOP, $SIDEMENU_BOTTOM) !important;
+//     background: -o-linear-gradient(bottom right, $SIDEMENU_TOP, $SIDEMENU_BOTTOM) !important;
+//     background: -moz-linear-gradient(bottom right, $SIDEMENU_TOP, $SIDEMENU_BOTTOM) !important;
+//     background: linear-gradient(to bottom right, $SIDEMENU_TOP, $SIDEMENU_BOTTOM) !important;
+//     border-color: white; 
+// }
+// .toolbar-title, .bar-button{
+//     color: white;
+//     text-align: center;
+// }
+// ion-toast{
+//     div.toast-wrapper.toast-bottom{
+//         background-color: $PAYOHIMA_COLOR;
+//     }
+// }
+// ion-toast.login-successful{
+//     .toast-wrapper{
+//         background-color: lightseagreen;
+//     }    
+// }
+// ion-toast.logout-successful{
+//     .toast-wrapper{
+//         background-color: mediumvioletred;
+//     }    
+// }
+// ion-input{
+//     padding: 0px;
+// }
+.toast-success .toast-wrapper{
+    background-color: green !important;
+    color: white !important;
+}
+.toast-error .toast-wrapper{
+    background-color: orangered !important;
+    color: white !important;
+}
+.error-message p{
+    color: red !important;
+}
+ion-select{
+    max-width: 100% !important;
+    padding: 0;
+}

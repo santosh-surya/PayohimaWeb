@@ -1,0 +1,72 @@
+page-login {
+  background-color:#e1e1e1; 
+  @media screen and (min-width: 1000px) {
+  .web{
+      $width: 600px;
+      $height: 500px;
+      $full: 100%;
+      width: $width !important;
+      height: $height !important;
+      left: unquote("calc( (#{$full} - #{$width} ) /2 )") !important;
+      top: unquote("calc( (#{$full} - #{$height} ) /2 )") !important;
+      &{
+        background-color:#e1e1e1; 
+      }
+    }
+  }
+  ion-card-header{
+    text-align: center;
+  }
+  ion-item:not(:last-child){
+    // padding-left: 0px !important;
+    border-bottom: 1px solid #dedede !important;
+  }
+  .modal-wrapper {
+    top: 10% !important; 
+    left: 10%;
+    width: 80%;
+    height: 80%;
+  }
+
+  img {
+    display: block;
+    margin: auto;
+  }
+  form {
+    margin-bottom: 32px;
+    button {
+      margin-top: 20px;
+    }
+  }
+
+  p {
+    font-size: 0.8em;
+    color: #d2d2d2;
+  }
+
+  ion-label {
+    margin-left: 5px;
+  }
+
+  ion-input {
+    padding: 5px;
+  }
+
+  .invalid {
+    border-bottom: 1px solid #FF6153;
+  }
+
+  .error-message .item-inner {
+    border-bottom: 0 !important;
+  }
+  .facebook{
+    background-color: #3b5998;
+  }
+  .google{
+    background-color: #d34836;
+  }
+  ion-card{
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12), 0 0 10px rgba(0, 0, 0, 0.24) !important;
+  }
+
+}
