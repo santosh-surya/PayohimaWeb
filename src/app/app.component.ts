@@ -1,3 +1,4 @@
+import { ProductsManagementPage } from './../pages/products-management/products-management';
 import { SettingsService } from './../providers/settings-service';
 import { LocationService } from './../providers/location-service';
 import { UserService } from './../providers/user-service';
@@ -11,7 +12,6 @@ import { AuthService } from './../providers/auth-service';
 import { LoginPage } from './../pages/login/login';
 import { UsersPage } from './../pages/users/users';
 import { OrdersPage } from './../pages/orders/orders';
-import { ItemsPage } from './../pages/items/items';
 import { TransactionsPage } from './../pages/transactions/transactions';
 import { AccountPage } from './../pages/account/account';
 import { DashboardPage } from './../pages/dashboard/dashboard';
@@ -83,8 +83,8 @@ export class MyApp {
         { title: 'Cash Register', component: CashRegisterPage, icon:"cash" },
         { title: 'Transactions', component: TransactionsPage, icon: "cash" },
         { title: 'Orders Management', component: OrdersPage, icon: "basket" },
-        { title: 'Company Settings', component: ItemsPage, icon: "settings" },
-        { title: 'Items Management', component: ItemsPage, icon: "pricetags" },
+        { title: 'Company Settings', component: ProductsManagementPage, icon: "settings" },
+        { title: 'Product Management', component: ProductsManagementPage, icon: "pricetags" },
         { title: 'Users Management', component: UsersPage, icon: "people" },
         { title: 'Reports', component: ReportsPage, icon: "document" },
         { title: 'Mobile Homescreen', component: MobileAppPage, icon: "document" },
@@ -95,7 +95,7 @@ export class MyApp {
         { title: 'Your Account', component: AccountPage, icon: "person" },
         { title: 'Cash Register', component: CashRegisterPage, icon:"cash" },
         { title: 'Dashboard', component: DashboardPage, icon:"home" },
-        { title: 'Items Management', component: ItemsPage, icon: "pricetags" },
+        { title: 'Products Management', component: ProductsManagementPage, icon: "pricetags" },
         { title: 'Transactions Management', component: TransactionsPage, icon: "cash" },
         { title: 'Orders Management', component: OrdersPage, icon: "basket" },
         { title: 'Reports', component: ReportsPage, icon: "document" },
@@ -106,7 +106,6 @@ export class MyApp {
         { title: 'Your Account', component: AccountPage, icon: "person" },
         { title: 'Cash Register', component: CashRegisterPage, icon:"cash" },
         { title: 'Dashboard', component: DashboardPage, icon:"home" },
-        { title: 'Items', component: ItemsPage, icon: "pricetags" },
         { title: 'Transactions', component: TransactionsPage, icon: "cash" },
       ];    
     }

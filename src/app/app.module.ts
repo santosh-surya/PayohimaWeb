@@ -1,3 +1,6 @@
+import { ProductEditPage } from './../pages/product-edit/product-edit';
+import { ProductService } from './../providers/product-service';
+import { ProductsManagementPage } from './../pages/products-management/products-management';
 import { EditRolePage } from './../pages/edit-role/edit-role';
 import { UserEditPage } from './../pages/user-edit/user-edit';
 import { UserService } from './../providers/user-service';
@@ -20,7 +23,6 @@ import { LoginPage } from './../pages/login/login';
 import { UsersPage } from './../pages/users/users';
 import { OrdersPage } from './../pages/orders/orders';
 import { TransactionsPage } from './../pages/transactions/transactions';
-import { ItemsPage } from './../pages/items/items';
 import { AccountPage } from './../pages/account/account';
 import { DashboardPage } from './../pages/dashboard/dashboard';
 import { NgModule, ErrorHandler } from '@angular/core';
@@ -35,7 +37,8 @@ import { Storage } from '@ionic/storage';
     SplashPage,
     DashboardPage,
     AccountPage,
-    ItemsPage,
+    ProductsManagementPage,
+    ProductEditPage,
     TransactionsPage,
     OrdersPage,
     LoginPage,
@@ -58,7 +61,8 @@ import { Storage } from '@ionic/storage';
     SplashPage,
     DashboardPage,
     AccountPage,
-    ItemsPage,
+    ProductsManagementPage,
+    ProductEditPage,
     TransactionsPage,
     OrdersPage,
     LoginPage,
@@ -83,6 +87,7 @@ import { Storage } from '@ionic/storage';
     AccountService,
     SettingsService,
     LocationService,
+    ProductService,
     UserService]
 })
 export class AppModule {}

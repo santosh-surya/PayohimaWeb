@@ -1,3 +1,4 @@
+import { AuthService } from './../../providers/auth-service';
 import { TransactionsPage } from './../transactions/transactions';
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
@@ -13,16 +14,18 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'dashboard.html'
 })
 export class DashboardPage {
-  public pet:any = "kittens";
+  public tab:string = "reports";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public changeDetectorRef: ChangeDetectorRef) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public changeDetectorRef: ChangeDetectorRef, public authService: AuthService) {
+    
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DashboardPage');
   }
   tabChanged($event){
     console.log($event);
-    this.pet = $event.value;
+    this.tab = $event.value;
     this.changeDetectorRef.detectChanges();
     
   }
