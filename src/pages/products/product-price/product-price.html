@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button outline item-right icon-left (click)="cancel()" color="danger">
+        <ion-icon name="arrow-back"></ion-icon>
+        Cancel
+      </button>
+    </ion-buttons>
+    <ion-title>{{getTitle()}}</ion-title>
+    <ion-buttons end>
+      <button ion-button outline item-right icon-left (click)="delete()" color="danger" *ngIf="!isNew">
+        <ion-icon name="trash"></ion-icon>
+        Delete
+      </button>
+      <button ion-button outline item-right icon-left (click)="save()" *ngIf="!isNew">
+        <ion-icon name="checkmark"></ion-icon>
+        Update
+      </button>
+      <button ion-button outline item-right icon-left (click)="save()" *ngIf="isNew">
+        <ion-icon name="add"></ion-icon>
+        Create
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="priceForm">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>SKU</ion-label>
+        <ion-input placeholder="SKU" type="text" formControlName="sku"></ion-input>                
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Price</ion-label>
+        <ion-input placeholder="Price" type="text" formControlName="price"></ion-input>                
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Stock</ion-label>
+        <ion-input placeholder="Stock" type="text" formControlName="stock"></ion-input>                
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Opening Stock</ion-label>
+        <ion-input class="price" placeholder="Opening Stock" type="text" formControlName="opening_stock"></ion-input>                
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Opening Stock Date</ion-label>
+        <ion-datetime class="price" placeholder="Opening Date" 
+            displayFormat="DD/MM/YYYY" 
+            pickerFormat="DD/MM/YYYY" 
+            min="2015-01-01"
+            doneText="Select Date "
+            formControlName="opening_stock_date"></ion-datetime>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

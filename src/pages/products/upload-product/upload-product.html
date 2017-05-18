@@ -1,0 +1,140 @@
+<ion-header>
+  <ion-navbar>
+    <ion-row>
+      <ion-col margin-vertical>
+        <button ion-button menuToggle left>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col margin-horizontal text-center>
+        <h2>Batch Update Products</h2>
+      </ion-col>
+      <ion-col  text-right>
+        <button ion-button outline item-right icon-left (click)="save()">
+          <ion-icon name="checkmark"></ion-icon>
+          Update
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-grid class="table-with-header">
+    <ion-row>
+      <ion-col width-20 >Name</ion-col>
+      <ion-col width-10>Description</ion-col>
+      <ion-col width-10>Tax / Tax Inclusive</ion-col>
+      <ion-col width-60>SKU & Price</ion-col>
+    </ion-row>
+    <ion-row *ngIf="uploadedProducts['NEW'].length>=0"><ion-col text-center><span class="new">Total of {{newCount}} new products uploaded. </span><span class="new">{{newModifiedCount}} new products added. </span><span class="error">{{newErrorCount}} products have errors.</span></ion-col></ion-row>
+    <ion-row align-items-center *ngFor="let product of uploadedProducts['NEW']">
+      <ion-col width-20>
+        <span class="new">{{product.name_new}}</span>
+        <p class="small-error" *ngIf="product.errors">{{product.errors['name']}}</p>
+      </ion-col>
+      <ion-col width-10>
+        <span class="new">{{product.description_new}}</span>
+      </ion-col>
+      <ion-col width-10>
+        <span *ngIf="product.tax_new.length>0" class="new">{{product.tax_new}} % {{product.price_tax_inclusive_new? "Included":"Excluded"}}</span>
+        <p class="small-error" *ngIf="product.errors">{{product.errors['tax']}}</p>
+      </ion-col>
+      <ion-col width-60>
+        <ion-grid *ngIf="product.prices.length>0">
+          <ion-row *ngFor="let price of product.prices">
+            <ion-col width-20>
+              <span>{{price.sku_new}}</span>
+              <p class="small-error" *ngIf="price.errors">{{price.errors['sku']}}</p>
+            </ion-col>
+            <ion-col width-20>{{ getCurrency() }} 
+              <span >{{price.price_new}}</span>
+              <p class="small-error" *ngIf="price.errors">{{price.errors['price']}}</p>
+            </ion-col>
+            <ion-col width-20>
+              <span >{{price.stock_new}}</span>
+              <p class="small-error" *ngIf="price.errors">{{price.errors['stock']}}</p>
+            </ion-col>
+            <ion-col width-20>
+              <span >{{price.opening_stock_new}}</span>
+              <p class="small-error" *ngIf="price.errors">{{price.errors['opening_stock']}}</p>
+            </ion-col>
+            <ion-col width-20>
+              <span >{{price.opening_stock_date_new}}</span>
+              <p class="small-error" *ngIf="price.errors">{{price.errors['opening_stock_date']}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <span *ngIf="product.prices.length==0" class="error">No Price found for new product</span>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="oldCount>0"><ion-col text-center><span>Total of {{oldCount}} old products uploaded. </span><span class="new">{{oldModifiedCount}} products modified. </span><span class="error">{{oldErrorCount}} products have errors.</span></ion-col></ion-row>
+    <ion-row align-items-center *ngFor="let key of oldProductKeys()">
+      <ion-col width-20>
+        <span *ngIf="uploadedProducts['OLD'][key].name != uploadedProducts['OLD'][key].name_new" class="strikethrough" >{{uploadedProducts['OLD'][key].name}}</span>
+        <span>{{uploadedProducts['OLD'][key].name_new}}</span>
+        <p class="small-error" *ngIf="uploadedProducts['OLD'][key].errors">{{uploadedProducts['OLD'][key].errors['name']}}</p>
+      </ion-col>
+      <ion-col width-10>
+        <span *ngIf="uploadedProducts['OLD'][key].descrption != uploadedProducts['OLD'][key].descrption_new"  class="strikethrough">{{uploadedProducts['OLD'][key].descrption}}</span>
+        <span>{{uploadedProducts['OLD'][key].description_new}}</span>
+      </ion-col>
+      <ion-col width-10>
+        <span *ngIf="uploadedProducts['OLD'][key].tax != uploadedProducts['OLD'][key].tax_new" class="strikethrough">{{uploadedProducts['OLD'][key].tax}}</span>
+        <span *ngIf="uploadedProducts['OLD'][key].tax.length>0 || uploadedProducts['OLD'][key].tax_new.length>0">{{uploadedProducts['OLD'][key].tax_new}} %</span>
+        <span *ngIf="uploadedProducts['OLD'][key].price_tax_inclusive != uploadedProducts['OLD'][key].price_tax_inclusive_new" class="strikethrough">{{uploadedProducts['OLD'][key].price_tax_inclusive}}</span>
+        <span *ngIf="uploadedProducts['OLD'][key].tax_new.length>0">{{uploadedProducts['OLD'][key].price_tax_inclusive_new?"Included":"Excluded"}}</span>
+        <p class="small-error" *ngIf="uploadedProducts['OLD'][key].errors">{{uploadedProducts['OLD'][key].errors['tax']}}</p>
+      </ion-col>
+      <ion-col width-60 align-self-center>
+        <ion-grid *ngIf="uploadedProducts['OLD'][key].prices.length>0">
+          <ion-row align-items-center *ngFor="let price of uploadedProducts['OLD'][key].prices">
+            <ion-col width-20>
+              <span *ngIf="price.sku != price.sku_new">
+                <span class="strikethrough">{{price.sku}}</span>
+                <span class="new">{{price.sku_new}}</span>
+              </span>
+              <span *ngIf="price.sku == price.sku_new">{{price.sku_new}}</span>
+              <p class="small-error" *ngIf="price.errors">{{price.errors['sku']}}</p>
+            </ion-col>
+            <ion-col width-20>{{ getCurrency() }} 
+              <span *ngIf="price.price!= price.price_new">
+                <span class="strikethrough">{{price.price}}</span>
+                <span class="new">{{price.price_new}}</span>
+              </span>
+              <span *ngIf="price.price == price.price_new">{{price.price_new}}</span>
+              <p class="small-error" *ngIf="price.errors">{{price.errors['price']}}</p>
+            </ion-col>
+            <ion-col width-20>
+              <span *ngIf="price.stock != price.stock_new">
+                <span class="strikethrough">{{price.stock}}</span>
+                <span class="new">{{price.stock_new}}</span>
+              </span>
+              <span *ngIf="price.stock == price.stock_new">{{price.stock_new}}</span>
+              <p class="small-error" *ngIf="price.errors">{{price.errors['stock']}}</p>
+            </ion-col>
+            <ion-col width-20>
+              <span *ngIf="price.opening_stock != price.opening_stock_new">
+                <span class="strikethrough">{{price.opening_stock}}</span>
+                <span class="new">{{price.opening_stock_new}}</span>
+              </span>
+              <span *ngIf="price.opening_stock == price.opening_stock_new">{{price.opening_stock_new}}</span>
+              <p class="small-error" *ngIf="price.errors">{{price.errors['opening_stock']}}</p>
+            </ion-col>
+            <ion-col width-20>
+              <span *ngIf="price.opening_stock_date != price.opening_stock_date_new">
+                <span class="strikethrough">{{price.opening_stock_date}}</span>
+                <span class="new">{{price.opening_stock_date_new}}</span>
+              </span>
+              <span *ngIf="price.opening_stock_date == price.opening_stock_date_new">{{price.opening_stock_date_new}}</span>
+              <p class="small-error" *ngIf="price.errors">{{price.errors['opening_stock_date']}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>    
+        <span *ngIf="uploadedProducts['OLD'][key].prices.length==0" class="error">No Price found for this product</span>    
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

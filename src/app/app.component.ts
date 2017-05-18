@@ -1,19 +1,20 @@
-import { ProductsManagementPage } from './../pages/products-management/products-management';
+import { SettingsPage } from './../pages/settings/settings';
+import { ProductsManagementPage } from './../pages/products/products-management/products-management';
 import { SettingsService } from './../providers/settings-service';
 import { LocationService } from './../providers/location-service';
 import { UserService } from './../providers/user-service';
-import { ResetPasswordPage } from './../pages/resetpassword/resetpassword';
+import { ResetPasswordPage } from './../pages/profile/resetpassword/resetpassword';
 import { ReportsPage } from './../pages/reports/reports';
 import { MobileAppPage } from './../pages/mobile-app/mobile-app';
 import { CashRegisterPage } from './../pages/cash-register/cash-register';
 import { SplashPage } from './../pages/splash/splash';
 import { Database } from './../providers/database';
 import { AuthService } from './../providers/auth-service';
-import { LoginPage } from './../pages/login/login';
-import { UsersPage } from './../pages/users/users';
+import { LoginPage } from './../pages/profile/login/login';
+import { UsersPage } from './../pages/profile/users/users';
 import { OrdersPage } from './../pages/orders/orders';
 import { TransactionsPage } from './../pages/transactions/transactions';
-import { AccountPage } from './../pages/account/account';
+import { AccountPage } from './../pages/profile/account/account';
 import { DashboardPage } from './../pages/dashboard/dashboard';
 import { Component, ViewChild, NgZone, ChangeDetectorRef } from '@angular/core';
 import { Nav, Platform, MenuController, Events, AlertController } from 'ionic-angular';
@@ -36,9 +37,9 @@ export class MyApp {
     public platform: Platform,
     public menuCtrl: MenuController,
     private alertCtrl: AlertController,
+    private settingsService: SettingsService,
     private authService: AuthService,
     private userService: UserService,
-    private settingsService: SettingsService,
     private locationSerivce: LocationService,
     private database: Database,
     private events: Events,
@@ -49,14 +50,12 @@ export class MyApp {
       })
   }
   userLoggedin(){
-    console.log("Just Logged In");
     this.photoURL = this.authService.currentUser.photoURL + '?' + new Date().getTime();
     this.processRole();
     this.nav.setRoot(DashboardPage); 
   }
   
   userLoggedOut(){
-      console.log("Logged Out");
       if (this.nav.root != LoginPage){
         this.nav.setRoot(LoginPage);
       }
@@ -83,7 +82,7 @@ export class MyApp {
         { title: 'Cash Register', component: CashRegisterPage, icon:"cash" },
         { title: 'Transactions', component: TransactionsPage, icon: "cash" },
         { title: 'Orders Management', component: OrdersPage, icon: "basket" },
-        { title: 'Company Settings', component: ProductsManagementPage, icon: "settings" },
+        { title: 'Company Settings', component: SettingsPage, icon: "settings" },
         { title: 'Product Management', component: ProductsManagementPage, icon: "pricetags" },
         { title: 'Users Management', component: UsersPage, icon: "people" },
         { title: 'Reports', component: ReportsPage, icon: "document" },
@@ -118,12 +117,12 @@ export class MyApp {
       StatusBar.styleDefault();
       this.settingsService.init().then(()=>{
         this.authService.init().then(()=>{
-          // this.authService.watchAuthentication();
-          Splashscreen.hide();
-          this.events.subscribe("login:loggedin", this.userLoggedin.bind(this));
-          this.events.subscribe("login:loggedout", this.userLoggedOut.bind(this));
-          this.events.subscribe("account:updated", this.updateUI.bind(this));
-          this.userLoggedOut(); // start with login page
+            // this.authService.watchAuthentication();
+            Splashscreen.hide();
+            this.events.subscribe("login:loggedin", this.userLoggedin.bind(this));
+            this.events.subscribe("login:loggedout", this.userLoggedOut.bind(this));
+            this.events.subscribe("account:updated", this.updateUI.bind(this));
+            this.userLoggedOut(); // start with login page
         });
       })
     });
@@ -135,8 +134,7 @@ export class MyApp {
     switch (page.component){
       case AccountPage:
       case UsersPage:
-        this.nav.push(page.component)
-        break;
+      case SettingsPage:
       default:
       this.nav.setRoot(page.component);        
     }

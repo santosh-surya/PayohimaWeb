@@ -4,7 +4,7 @@ import { AuthService } from './auth-service';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { ImageService } from './image-service';
+import { StorageService } from './storage-service';
 
 @Injectable()
 export class LocationService {
@@ -12,20 +12,20 @@ export class LocationService {
   public locations: any;
   constructor(
     http: Http,
-    private imageService: ImageService,
+    private imageService: StorageService,
     private authService: AuthService,
     private database: Database,
     private events: Events
 
   ) {
-    console.log("locations service created");
+    // console.log("locations service created");
     events.subscribe("login:loggedin", this.userLoggedIn.bind(this));
     events.subscribe("login:loggedout", this.userLoggedOut.bind(this));
     // if (this.authService.currentUser)
       // this.userLoggedIn();
   }
   userLoggedOut(){
-    console.log("locations service: loggedout");
+    // console.log("locations service: loggedout");
     if (this.locationsDb){
       this.locationsDb.off("value");
       this.locations = [];
@@ -33,7 +33,7 @@ export class LocationService {
     }
   }
   userLoggedIn(){
-    console.log("locations service: loggedin");
+    // console.log("locations service: loggedin");
     let self = this;
     this.database.getDb().then((db:any)=>{
       self.locationsDb = db.ref('/database/companies/'+self.authService.currentUser.company+"/locations");
@@ -48,7 +48,7 @@ export class LocationService {
         this.locations.push(u[key]);
       }
     }
-    console.log("locations list generated");
+    // console.log("locations list generated");
     this.events.publish("locations:updated");
   }
 }

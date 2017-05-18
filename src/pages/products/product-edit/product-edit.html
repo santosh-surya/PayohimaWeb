@@ -1,0 +1,141 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle left>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{getTitle()}}</ion-title>
+    <ion-buttons end>
+      <button ion-button small outline item-right icon-left (click)="delete()" color="danger" *ngIf="!isNew">
+        <ion-icon name="trash"></ion-icon>
+        Delete
+      </button>
+      <button ion-button small outline item-right icon-left (click)="save()" *ngIf="!isNew">
+        <ion-icon name="checkmark"></ion-icon>
+        Update
+      </button>
+      <button ion-button small outline item-right icon-left (click)="save()" *ngIf="isNew">
+        <ion-icon name="add"></ion-icon>
+        Create
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="productForm">
+    <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="primary" floating>Name</ion-label>
+                <ion-input type="text" [class.invalid]="!productForm.controls.name.valid && productForm.controls.name.dirty" formControlName="name"></ion-input>
+              </ion-item>
+              <ion-item class="error-message" *ngIf="!productForm.controls.name.valid  && productForm.controls.name.dirty">
+                <p>Please enter Name.</p>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="primary" floating>Description</ion-label>
+                <ion-textarea rows="4"  formControlName="description"></ion-textarea>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="primary" floating>Tax %</ion-label>
+                <ion-input type="text" [class.invalid]="!productForm.controls.tax.valid && productForm.controls.tax.dirty" formControlName="tax"></ion-input>
+              </ion-item>
+              <ion-item class="error-message" *ngIf="!productForm.controls.tax.valid  && productForm.controls.tax.dirty">
+                <p>Please number for % for tax between 0 & 100.</p>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label >Price inclusive of Tax</ion-label>
+                <ion-toggle [class.invalid]="!productForm.controls.price_tax_inclusive.valid && productForm.controls.price_tax_inclusive.dirty" formControlName="price_tax_inclusive"></ion-toggle>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+      <ion-col align-self-end>
+        <ion-grid>
+          <ion-row justify-content-center>
+            <ion-col>
+                <div style="text-align: center;">
+                <img #productImage style="margin: 0 auto; max-width: 300px " src="{{product.image}}">
+                </div>
+            </ion-col>
+          </ion-row>
+          <ion-row justify-content-center>
+            <ion-col>
+              <upload-button  icon-left full icon-name="cloud-upload" [uploading]="uploading" id="imageUpload" placeHolder="Upload Image" [change]="uploadFile.bind(this)"></upload-button>
+            </ion-col>
+          </ion-row>
+    </ion-grid>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <ion-toolbar>
+          <ion-title>Prices</ion-title>
+          <ion-buttons end>
+            <button ion-button icon-left outline (click)="addPrice()">
+              <ion-icon name="checkmark-circle"></ion-icon>
+              Add Price
+            </button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <ion-grid  class="table-with-header">
+          <ion-row >
+            <ion-col ><ion-label>SKU</ion-label></ion-col>
+            <ion-col ><ion-label>Price</ion-label></ion-col>
+            <ion-col ><ion-label>Stock</ion-label></ion-col>
+            <ion-col ><ion-label>Opening Stock</ion-label></ion-col>
+            <ion-col ><ion-label>Opening Date</ion-label></ion-col>
+            <ion-col text-right><ion-label>Actions</ion-label></ion-col>
+          </ion-row>
+          <ion-row *ngFor="let price of product.prices; let i = index;">
+            <ion-col>
+                {{price.sku}}
+            </ion-col>
+            <ion-col>
+                {{price.price}}
+            </ion-col>
+            <ion-col>
+                {{price.stock}}
+            </ion-col>
+            <ion-col>
+                {{price.opening_stock}}
+            </ion-col>
+            <ion-col>
+                {{price.opening_stock_date}}
+            </ion-col>
+            <ion-col text-right>
+              <button ion-button icon-only color="danger" outline item-right (click)="editPrice(price, i)">
+                <ion-icon name="build"></ion-icon>
+              </button>          
+              <button ion-button icon-only color="danger" outline item-right (click)="removePrice(i)">
+                <ion-icon name="trash"></ion-icon>
+              </button>          
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

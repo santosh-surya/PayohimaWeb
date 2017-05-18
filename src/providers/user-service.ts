@@ -4,7 +4,7 @@ import { AuthService } from './auth-service';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { ImageService } from './image-service';
+import { StorageService } from './storage-service';
 
 /*
   Generated class for the UserService provider.
@@ -18,18 +18,18 @@ export class UserService {
   public users: any;
   constructor(
     http: Http,
-    private imageService: ImageService,
+    private imageService: StorageService,
     private authService: AuthService,
     private database: Database,
     private events: Events
 
   ) {
-    console.log("user service created");
+    // console.log("user service created");
     events.subscribe("login:loggedin", this.userLoggedIn.bind(this));
     events.subscribe("login:loggedout", this.userLoggedOut.bind(this));
   }
   userLoggedOut(){
-    console.log("user service: loggedout");
+    // console.log("user service: loggedout");
     if (this.usersDb){
       this.usersDb.off("value");
       this.users = [];
@@ -37,7 +37,7 @@ export class UserService {
     }
   }
   userLoggedIn(){
-    console.log("user service: loggedin");
+    // console.log("user service: loggedin");
     let self = this;
     this.database.getDb().then((db:any)=>{
       self.usersDb = db.ref('/database/users');
@@ -53,7 +53,7 @@ export class UserService {
         this.users.push(u[key]);
       }
     }
-    console.log("users list generated");
+    // console.log("users list generated");
     this.events.publish("users:updated");
   }
   updateUser(user){

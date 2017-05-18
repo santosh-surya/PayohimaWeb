@@ -31,7 +31,7 @@ export class SettingsService {
         self.globalSettingsDb.on('value', (snapshot)=>{
           if (snapshot.val()){
             self.globalSettings = snapshot.val();
-            console.log("global Settings", self.globalSettings);
+            // console.log("global Settings", self.globalSettings);
             resolve();
           }else{
             self.globalSettings = {};
@@ -48,14 +48,14 @@ export class SettingsService {
     
   }
   userLoggedOut(){
-    console.log("settings service: loggedout");
+    // console.log("settings service: loggedout");
     if (this.companySettingsDb){
       this.companySettingsDb.off("value");
       this.companySettingsDb = null;
     }
   }
   userLoggedIn(user){
-    console.log("setttings service: loggedin");
+    // console.log("setttings service: loggedin");
     let self = this;
     this.database.getDb().then((db:any)=>{
       self.companySettingsDb = db.ref('/database/companies/'+user.company+"/settings");
@@ -77,10 +77,10 @@ export class SettingsService {
     this.globalSettings[name] = value;
     this.globalSettingsDb.set(this.globalSettings);
   }
-  get(name){
+  getCompanySetting(name){
     return this.companySettings[name];
   }
-  set(name, value){
+  setCompanySetting(name, value){
     this.companySettings[name] = value;
     this.companySettingsDb.set(this.companySettings);
   }

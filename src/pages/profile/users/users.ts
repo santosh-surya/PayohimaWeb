@@ -1,7 +1,7 @@
 import { Events, ViewController } from 'ionic-angular';
-import { AuthService } from './../../providers/auth-service';
+import { AuthService } from './../../../providers/auth-service';
 import { UserEditPage } from './../user-edit/user-edit';
-import { UserService } from './../../providers/user-service';
+import { UserService } from './../../../providers/user-service';
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
@@ -31,7 +31,7 @@ export class UsersPage {
   ionViewDidEnter() {
     this.users = this.userService.users;
     this.users = this.users.filter((user) => {
-        if (this.authService.currentUser.uid == user.uid) return false;
+        if (this.authService.currentUserUid == user.uid) return false;
         else return true;
       })        
   }
@@ -54,7 +54,7 @@ export class UsersPage {
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
       this.users = this.users.filter((user) => {
-        console.log(user.displayName, user.uid, this.authService.currentUser.uid);
+        console.log(user.displayName, user.uid, this.authService.currentUserUid);
         return (user.displayName.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }

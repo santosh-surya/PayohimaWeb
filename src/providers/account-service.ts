@@ -1,10 +1,11 @@
+import { StorageService } from './storage-service';
 import { Events } from 'ionic-angular';
 import { Database } from './database';
 import { AuthService } from './auth-service';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { ImageService } from './image-service';
+
 
 /*
   Generated class for the AccountService provider.
@@ -16,7 +17,7 @@ import { ImageService } from './image-service';
 export class AccountService {
 
   constructor(public http: Http, 
-    private imageService: ImageService,
+    private imageService: StorageService,
     private authService: AuthService,
     private database: Database,
     private events: Events

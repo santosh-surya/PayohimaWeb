@@ -1,7 +1,7 @@
 import { ChangeDetectorRef } from '@angular/core';
-import { AccountService } from './../../providers/account-service';
-import { ImageService } from './../../providers/image-service';
-import { AuthService } from './../../providers/auth-service';
+import { AccountService } from './../../../providers/account-service';
+import { StorageService } from './../../../providers/storage-service';
+import { AuthService } from './../../../providers/auth-service';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, AlertController, ToastController, Platform, ViewController } from 'ionic-angular';
@@ -30,7 +30,7 @@ export class AccountPage {
     public formBuilder: FormBuilder,
     private authService: AuthService,
     private accountService: AccountService,
-    private imageService: ImageService,
+    private imageService: StorageService,
     public viewCtrl: ViewController, 
     public alertCtrl: AlertController,
     private toastCtrl: ToastController,
@@ -83,7 +83,8 @@ export class AccountPage {
                 let toast = this.toastCtrl.create({
                   message: 'Saved successfully',
                   duration: 3000,
-                  position: 'bottom'
+                  position: 'bottom',
+                  cssClass: "toast-success"
                 });
                 toast.onDidDismiss(() => {
                   self.dismiss();
@@ -96,7 +97,8 @@ export class AccountPage {
               let toast = this.toastCtrl.create({
                 message: 'Saved successfully',
                 duration: 3000,
-                position: 'bottom'
+                position: 'bottom',
+                cssClass: "toast-success"
               });
               toast.onDidDismiss(() => {
                 self.dismiss();

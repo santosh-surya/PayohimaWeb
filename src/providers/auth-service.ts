@@ -20,6 +20,7 @@ export class AuthService {
   public nav: any; // to allow for login screen
 
   public currentUser: any;
+  public currentUserUid: any;
 
   zone: NgZone;
 
@@ -40,7 +41,7 @@ export class AuthService {
         self.fireAuth = self.database.auth;
         self.usersDb = db.ref('/database/users/');
         self.companiesDb = db.ref('/database/companies/');
-        console.log('auth constructed');
+        // console.log('auth constructed');
         resolve();
       })
       .catch((error)=>{
@@ -62,7 +63,7 @@ verifyPassword(password, passwordHash){
 
 // Watch User Updates
 onUserUpdate(){
-  this.usersDb.child(this.currentUser.uid).on("value", function(snapshot){
+  this.usersDb.child(this.currentUserUid).on("value", function(snapshot){
     if (snapshot.val() != null){
       this.currentUser = snapshot.val();
       this.events.publish("account:updated", this.currentUser);
@@ -73,7 +74,7 @@ onUserUpdate(){
 }
 // Unwatch User Updates
 offUserUpdate(){
-  this.usersDb.child(this.currentUser.uid).off("value");
+  this.usersDb.child(this.currentUserUid).off("value");
 }
 //isSuperUser
 isSuperUser(){
@@ -120,7 +121,7 @@ isManager(){
         if (snapshot.val() !=null){
             for(var d in snapshot.val()){
               self.currentUser = snapshot.val()[d];
-              console.log(self.currentUser);
+              self.currentUserUid = d;
               self.events.publish("login:loggedin", self.currentUser);
               resolve(self.currentUser);
               self.onUserUpdate(); // start listening for changes to user data
@@ -130,23 +131,6 @@ isManager(){
             reject({message: "Sorry, username & password do not match any reecords."});
           }
       });
-      // self.fireAuth.signInWithEmailAndPassword(email, password)
-      //   .then((user)=>{
-      //     self.usersDb.child(user.uid).on("value", function(snapshot){
-      //       if (snapshot.val() != null){
-      //         self.currentUser = snapshot.val();
-      //         console.log(self.currentUser);
-      //         self.events.publish("login:loggedin", self.currentUser);
-      //         resolve(self.currentUser);
-      //         self.onUserUpdate(); // start listening for changes to user data
-      //       }else{
-      //         reject("Sorry, something went wrong. Please contact us to restore you account.");
-      //       }
-      //     })
-      //   })
-      //   .catch((error)=>{
-      //     reject(error);
-      //   });
     });
   }
 // Create up
@@ -180,7 +164,7 @@ isManager(){
           email: user.email,
           mobile: user.mobile,
           providerId: 'firebase',
-          password: self.generatePasswordHash(user.password),
+          password: user.email+self.generatePasswordHash(user.password),
           photoURL: '/assets/images/person-icon.png',
           companyname: user.companyname,
           companyaddress: user.companyaddress,
@@ -194,34 +178,64 @@ isManager(){
     });
   }
 // Ensure Company
-  ensureCompany(c, name, email){
+  ensureCompany(companyname, address, name, email){
     let self = this;
     return new Promise(function(resolve, reject){
+      var c:any = {};
       c.settings = {
+        "company_name": companyname,
+        "company_name_lower": companyname.toLowerCase(),
+        "company_address": address,
         "stylesheet": ";",
         "template": "{}",
         "identification_no": "VAT XXXXXXX TIN YYYYYYY",
         "contact_name": name,
-        "contact_email": email
+        "contact_email": email,
+        "currency": "GBP",
+        "tax": 20,
+        "price_tax_inclusive": true
       };
-      c.locations = [
+      var locations = [
         { name: "DEFAULT", products: [], transactions: [], settings: {}}
       ];
-      
-      var company = self.companiesDb.push(c);
-      resolve(company);
+      var key = self.companiesDb.push().key;
+      c.uid = key;
+      self.companiesDb.child('/'+key).set(c)
+        .then(()=>{
+          self.ensureCompanyLocations(c, locations)
+            .then(()=>{
+              resolve(c);
+            }) 
+        })
+        .catch((error)=>{
+          reject(error);
+        })
+    });
+  }
+  ensureCompanyLocations(company:any, locations:any){
+    let self = this;
+    return new Promise(function(resolve, reject){
+      let locationsDb = self.companiesDb.child('/'+company.uid+'/locations');
+      for (var i=0; i<locations.length; i++){
+        var location = locationsDb.push();
+        locations[i].uid = location.key;
+        location.set(locations[i]);     
+      }
+      resolve();
     });
   }
 // Is Company Registered
   isCompanyRegistered(companyname){
     let self = this;
     return new Promise(function(resolve, reject){
-      self.companiesDb.orderByChild("nameLower").equalTo(companyname.toLowerCase()).once("value", function(snapshot){
-        if (snapshot.val()){
-          reject({message:"Company Name already registered"});
-        }else{
-          resolve();
+      self.companiesDb.orderByKey().once("value", function(snapshot){
+        var companies = snapshot.val();
+        for (var company in companies){
+          if (companies[company].settings.company_name_lower == companyname.toLowerCase()){
+            reject({message:"Company Name already registered"});
+          }
         }
+        resolve();
       });
     });
   }
@@ -270,12 +284,19 @@ isManager(){
     //create company first
     if (user.companyname != undefined){
       return new Promise(function(resolve, reject){
-          self.ensureCompany({name: user.companyname, nameLower: user.companyname.toLowerCase(), address: user.companyaddress}, user.displayName, user.email)
+          self.ensureCompany(user.companyname, user.companyaddress, user.displayName, user.email)
             .then((company:any)=>{
-              data.company = company.key;
-              data.company_email = company.key+"_"+data.email;
-              var u = self.usersDb.push(data);
-              resolve(u);
+              data.company = company.uid;
+              data.company_email = company.uid+"_"+data.email;
+              var key = self.usersDb.push().key;
+              data.uid = key;
+              self.usersDb.child('/'+key).set(data)
+                .then(()=>{
+                  resolve(data);
+                })
+                .catch((error)=>{
+                  reject(error);
+                })
             })
             .catch((error)=>{
               reject(error);
@@ -284,17 +305,23 @@ isManager(){
     }else{
       data.company = user.company;
       return new Promise(function(resolve, reject){
-        var u = self.usersDb.push(data);
-        data.key = u.key;
-        data.company_email = u.company+"_"+data.email;
-        resolve(data);
+        var key = self.usersDb.push().key;
+        data.uid = key;
+        data.company_email = user.company+"_"+user.email;
+        self.usersDb.child('/'+key).set(data)
+          .then(()=>{
+            resolve(data);
+          })
+          .catch((error)=>{
+            reject(error);
+          })
       });
     }
   }
   ensureUserRoles(user, roles){
     let self = this;
     return new Promise(function(resolve, reject){
-      self.usersDb.child(user.key+"/roles").set(roles);
+      self.usersDb.child(user.uid+"/roles").set(roles);
       resolve();
     })
   }

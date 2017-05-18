@@ -1,10 +1,10 @@
-import { UserService } from './../../providers/user-service';
+import { UserService } from './../../../providers/user-service';
 import { ChangeDetectorRef } from '@angular/core';
-import { AuthService } from './../../providers/auth-service';
+import { AuthService } from './../../../providers/auth-service';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform, AlertController, ViewController, LoadingController, ModalController, Events, ToastController } from 'ionic-angular';
-import {LocationService} from './../../providers/location-service';
+import {LocationService} from './../../../providers/location-service';
 /*
   Generated class for the UserEditPage page.
 
@@ -51,10 +51,6 @@ export class UserEditPage {
         password: ['password', UserEditPage.validPassword],
         confirmpassword: ['password', UserEditPage.validConfirmPassword],
       });
-      // this.rolesForm = formBuilder.group({
-      //   location: ['', Validators.compose([Validators.required])],
-      //   role: ['', Validators.compose([Validators.required])]
-      // });
       this.userForm.addControl("locationnew", new FormControl(""));
       this.userForm.addControl("rolenew", new FormControl(""));
       this.user = {roles: []};
@@ -77,12 +73,9 @@ export class UserEditPage {
       this.roles = this.user.roles;
     }
   }
-  // roleUpdated(){
-  //   this.roles = this.user.roles;
-  // }
   addRole(){
     var form = this.userForm.value;
-    if (form.locationnew != "" || form.rolenew != ""){
+    if (form.locationnew != "" && form.rolenew != ""){
       //check if role already assigned
       for (var i=0; i<this.user.roles.length; i++){
         if (this.user.roles[i].role == form.rolenew && this.user.roles[i].location == form.locationnew){
@@ -172,7 +165,6 @@ export class UserEditPage {
     if (!this.userForm.valid){
       console.log(this.userForm.value);
     } else {
-
       this.authService.isUserRegistered(this.userForm.controls.email.value, this.authService.currentUser.company)
         .then(()=>{
           if (this.user.roles.length==0){

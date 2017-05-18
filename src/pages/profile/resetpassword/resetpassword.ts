@@ -1,5 +1,5 @@
 import { LoginPage } from './../login/login';
-import { AuthService } from './../../providers/auth-service';
+import { AuthService } from './../../../providers/auth-service';
 import { NavParams, LoadingController, AlertController, Platform, NavController, ToastController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';

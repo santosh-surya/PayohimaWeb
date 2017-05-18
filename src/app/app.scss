@@ -73,6 +73,9 @@
 // ion-input{
 //     padding: 0px;
 // }
+ion-app{
+    font-family: sans-serif !important;
+}
 .toast-success .toast-wrapper{
     background-color: green !important;
     color: white !important;
@@ -88,3 +91,70 @@ ion-select{
     max-width: 100% !important;
     padding: 0;
 }
+
+$table-header-background-color : #555;
+$table-header-color: #fff;
+$table-header-font-family: "Calibre", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+$table-header-font-size: 1.1em;
+$table-header-font-weight: bold;
+$table-body-background-color : #efefef;
+$table-body-color: #333;
+$table-body-font-family: "Calibre", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+$table-body-font-size: 1.1em;
+$table-body-font-weight: bold;
+ion-grid.table-with-header{
+    >ion-row{
+        min-height: 55px;
+    }
+    > ion-row:first-child, ion-row.header{
+        background-color: $table-header-background-color;
+        font-family: $table-header-font-family;
+        font-size: $table-header-font-size;
+        color: $table-header-color;
+        font-weight: $table-header-font-weight;
+        > ion-col:not(:first-child){ //border
+            border-left: 1px solid #dedede;
+        }
+        > ion-col{
+            align-self: center;
+        }
+    }
+    > ion-row:not(:first-child){
+        background-color: $table-body-background-color;
+        font-family: $table-body-font-family;
+        font-size: $table-body-font-size;
+        color: $table-body-color;
+        font-weight: $table-body-font-weight;
+        :hover{
+            background-color: #dedede;
+        }
+        > ion-col{
+            align-self: top;
+        }
+        > ion-col:not(:first-child){
+            border-left: 1px solid #ccc;
+        }
+    }
+    > ion-row:not(:last-child){
+        border-bottom: 1px solid #ccc;
+    }
+}
+ion-grid.table-without-header{
+    > ion-row{
+        background-color: $table-body-background-color;
+        font-family: $table-body-font-family;
+        font-size: $table-body-font-size;
+        color: $table-body-color;
+        font-weight: $table-body-font-weight;
+        :hover{
+            background-color: #dedede;
+        }
+        > ion-col{
+            align-self: top;
+        }
+        > ion-col:not(:first-child){
+            border-left: 1px solid #ccc;
+        }
+    }
+}
+

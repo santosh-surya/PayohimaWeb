@@ -15,23 +15,24 @@ import {Component, Input, ViewChild, ChangeDetectorRef} from "@angular/core";
  */
 export class UploadButtonComponent {
   @Input() placeHolder: String;
-  @Input() iconName: String;
   @Input() change: Function;
-  @Input() iconPosition: String;
   @Input() multiple: Boolean = false;
   @Input() full: String;
   @Input() round: String;
   @Input() block: String;
   @Input() small: String;
   @Input() large: String;
-  @Input() uploading: boolean = false;
+  @Input() outline: String;
+  @Input() color: String;
   @Input('icon-left') iconLeft: String;
   @Input('icon-right') iconRight: String;
+  @Input('icon-only') iconOnly: String;
+  @Input('icon-name') iconName: String;
+  @Input() uploading: boolean = false;
   @ViewChild("inputfileuploadbutton") nativeInputBtn: any;
   filename: string;
 
   constructor(private cd: ChangeDetectorRef) {
-    
   }
 
   /**
@@ -44,8 +45,6 @@ export class UploadButtonComponent {
     this.nativeInputBtn.nativeElement.click();
   }
   ngOnInit(){
-    // if (icon)
-    // console.log(this);
   }
 
   /**

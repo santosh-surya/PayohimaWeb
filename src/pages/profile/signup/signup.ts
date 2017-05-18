@@ -1,4 +1,4 @@
-import { AuthService } from './../../providers/auth-service';
+import { AuthService } from './../../../providers/auth-service';
 import { LoginPage } from './../login/login';
 import { NavController, LoadingController, AlertController, NavParams, ViewController, Platform, ToastController } from 'ionic-angular';
 import { Component } from '@angular/core';

@@ -1,3 +1,4 @@
+import { AuthService } from './auth-service';
 import { Database } from './database';
 import { Events, Platform } from 'ionic-angular';
 import { Injectable } from '@angular/core';
@@ -11,12 +12,13 @@ import 'rxjs/add/operator/map';
   for more info on providers and Angular 2 DI.
 */
 @Injectable()
-export class ImageService {
+export class StorageService {
 
   constructor(
     public http: Http, 
     private events: Events,
     private database: Database,
+    private authService: AuthService,
     private platform: Platform) {
 
   }
@@ -58,5 +60,24 @@ export class ImageService {
         })
 
     })
+  }
+
+  createTempFile(name, data, contentType){
+    let self = this;
+    return new Promise(function(resolve, reject){
+      self.database.getStorage()
+        .then( (storage:any)=>{
+          var ref = storage.child('/database/tempfiles/'+name);
+          ref.putString(data, 'raw', {contentType: contentType})
+            .then((savedFile) => {
+              resolve(savedFile.ref);
+            });
+        })
+        .catch((error)=>{
+          reject(error.message);
+        })
+
+    })
+    
   }
 }

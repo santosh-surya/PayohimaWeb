@@ -9,7 +9,7 @@
         <ion-item-divider color="light">About You</ion-item-divider>
         <ion-item>
           <ion-label color="primary" floating>Your Name</ion-label>
-          <ion-input type="text" [class.invalid]="!signupForm.controls.displayName.valid && signupForm.controls.displayName.dirty" formControlName="name"></ion-input>
+          <ion-input type="text" [class.invalid]="!signupForm.controls.displayName.valid && signupForm.controls.displayName.dirty" formControlName="displayName"></ion-input>
         </ion-item>
         <ion-item class="error-message" *ngIf="!signupForm.controls.displayName.valid  && signupForm.controls.displayName.dirty">
           <p>Please enter your name.</p>

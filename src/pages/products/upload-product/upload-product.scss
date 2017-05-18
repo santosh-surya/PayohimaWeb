@@ -1,0 +1,33 @@
+page-upload-product {
+    ion-content{
+        ion-grid:first-child{
+            border: 1px solid grey;
+            margin-top: 5px;
+        }
+        ion-row {
+            border-bottom: 1px solid grey;
+        }
+        ion-col{
+            border-right: 1px solid grey;
+        }
+        ion-row:last-child{
+            border-bottom: none;
+        }
+        ion-col:last-child{
+            border-right: none;
+        }
+    }
+    p.small-error{
+        margin: 0px;
+        font-size: 0.7em;
+        color: red;
+    }
+    span.error{color: red;}
+    span.new{ color: green}
+    span.strikethrough{
+        text-decoration: line-through; 
+    }
+    ion-row.error{
+        background-color: lightcoral;
+    }
+}

@@ -16,7 +16,6 @@ export class SplashPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SplashPage');
   }
 
 }

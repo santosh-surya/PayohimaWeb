@@ -1,4 +1,4 @@
-import { AuthService } from './../../providers/auth-service';
+import { AuthService } from './../../../providers/auth-service';
 import { Component } from '@angular/core';
 import { NavController, LoadingController, AlertController, NavParams, ModalController, ViewController, ToastController, Platform } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -35,9 +35,8 @@ export class LoginPage {
     private authService: AuthService){
       this.loginForm = formBuilder.group({
         email: ['anita@payohima.com', Validators.compose([Validators.required])],
-        password: ['password', Validators.compose([Validators.minLength(6), Validators.required])]
+        password: ['itissafe', Validators.compose([Validators.minLength(6), Validators.required])]
       });
-      console.log(platform._platforms);
   }
   pageClass(){
     if (this.platform._platforms.indexOf('core')>=0){

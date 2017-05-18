@@ -1,0 +1,82 @@
+ <ion-header>
+  <ion-navbar>
+    <ion-row>
+      <ion-col margin-vertical>
+        <button ion-button menuToggle left>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col margin-horizontal text-center>
+        <h2>Manage Products</h2>
+      </ion-col>
+      <ion-col  text-right>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row class="upload" align-items-center>
+      <ion-col align-self-center>
+        <button ion-button small color="light" (click)="updateBatch()">
+          Batch Update ({{productCount()}})
+        </button>
+        <button ion-button small color="light" (click)="batchDownload()">
+          Batch Download ({{productCount()}})
+        </button>
+        <button ion-button small color="primary" (click)="createProduct()">
+          <ion-icon name="add-circle"></ion-icon> Add Product
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="upload" *ngIf="downloadURL">
+      <ion-col>        
+        <a [href]="downloadURL" [target]="'_blank'" >Dowload File Here</a>
+        <p>Please right click & choose to save the linked file</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="upload" *ngIf="batchUpdateReady">
+      <ion-col>
+          <ion-textarea #uploaddata rows="4"  placeholder="Please paste the CSV data from Excel to here to update Product List"></ion-textarea>
+      </ion-col>
+    </ion-row>
+    <ion-row class="upload" *ngIf="batchUpdateReady">
+      <ion-col>
+        <button ion-button small color="danger" (click)="cancelUpdate()">
+          Cancel
+        </button>
+        <button ion-button small color="primary" (click)="batchUpload()">
+          Update Now
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-searchbar #searchbar (ionInput)="filterProducts($event)"></ion-searchbar>
+
+  <ion-grid class="table-with-header">
+    <ion-row>
+      <ion-col width-10><ion-label>Image</ion-label></ion-col>
+      <ion-col width-33><ion-label>Name/Description</ion-label></ion-col>
+      <ion-col width-67><ion-label>SKU & Price</ion-label></ion-col>
+    </ion-row>
+    <ion-row class="row" *ngFor="let key of productKeys()" (click)="productSelected(key, products[key])">
+      <ion-col width-10 align-self-center>
+        <img width="80px" src="{{products[key].image}}">
+      </ion-col>
+      <ion-col width-33 align-self-center>
+        <b>{{ products[key].name }}</b><br/>
+          {{ products[key].description }}
+      </ion-col>
+      <ion-col width-67 align-self-center>
+        <ion-grid>
+          <ion-row *ngFor="let price of products[key].prices">
+            <ion-col><span style="color: blue">{{price.sku}}</span></ion-col>
+            <ion-col><span style="color:green;">{{ getCurrency() }} {{price.price}} </span></ion-col>
+          </ion-row>
+        </ion-grid>        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

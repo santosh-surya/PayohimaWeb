@@ -85,7 +85,7 @@ export class Database {
       self.dbInstance = self.fireApp.database();
       self.storageRef = firebase.storage().ref();
       self.auth = self.fireApp.auth();
-      console.log('firebase initialised');
+      // console.log('firebase initialised');
       resolve();
     })
   }
